@@ -33,11 +33,7 @@
       @wheel="onWheel"
     >
       <div class="flipbook-container" :style="{ transform: `scale(${zoom})` }">
-        <div id="flesh">
-          <img src="https://catalogimg.blob.core.windows.net/catalogo2020/cats.png" alt="" id="bone">
-
-        </div>
-        <!-- <div
+        <div
           class="click-to-flip left"
           :style="{ cursor: canFlipLeft ? 'pointer' : 'auto' }"
           @click="flipLeft"
@@ -46,7 +42,7 @@
           class="click-to-flip right"
           :style="{ cursor: canFlipRight ? 'pointer' : 'auto' }"
           @click="flipRight"
-        /> -->
+        />
         <div :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }">
           <img
             class="page fixed"
@@ -60,7 +56,7 @@
             v-if="showLeftPage"
             @load="didLoadImage($event)"
           />
-          <img 
+          <img
             class="page fixed"
             :style="{
               width: pageWidth + 'px',
@@ -182,8 +178,6 @@ export default
       default: spinner
 
   data: ->
-    currentMousePos:{x:0,y:0}
-    event:{}
     viewWidth: 0
     viewHeight: 0
     imageWidth: null
@@ -358,29 +352,11 @@ export default
     @onResize()
     @zoom = @zooms_[0]
     @goToPage @startPage
-    
-    $(document).ready ->
-      currentMousePos = 
-        x: 360
-        y: 360
-      $('#flesh').on "mousemove", (event, page) ->
-        currentMousePos.x = event.pageX
-        currentMousePos.y = event.pageY
-        $('#bone').css '-webkit-mask-position-x', currentMousePos.x - 75
-        $('#bone').css '-webkit-mask-position-y', currentMousePos.y - 75
-        return
-      return
-    
-
 
   beforeDestroy: ->
     window.removeEventListener 'resize',  @onResize, passive: true
 
   methods:
-    changeImageBG: (id, url) ->
-      document.getElementById(id).src = url
-      return
-
     onResize: ->
       viewport = @$refs.viewport
       return unless viewport
@@ -887,26 +863,6 @@ export default
 </script>
 
 <style scoped>
-#flesh {
-  margin: 0;
-  height: auto;
-  width: 600px;
-  background: url('https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg') no-repeat;
-  background-size: 100% auto;
-}
-#bone{
-
-  width: 600px;
-  margin: 0;
-  mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/40713/xray-machine.png');
-  mask-repeat: no-repeat;
-  mask-size: 150px;
-  cursor: none;
-}
-* {
-  box-sizing: border-box;
-}
-
 .viewport {
   -webkit-overflow-scrolling: touch;
   width: 100%;
