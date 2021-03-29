@@ -30,6 +30,7 @@
     "dist": "rollup -c rollup.config.js"
   },
   "dependencies": {
+    "jquery": "^3.6.0",
     "rematrix": "^0.4.1",
     "vue-sidebar-menu": "^4.7.4"
   },

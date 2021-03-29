@@ -6,6 +6,8 @@ import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
 Vue.use(VueSidebarMenu)
 Vue.config.productionTip = false
 
+
+window.$ = window.jQuery = require('jquery')
 new Vue
   render: (h) -> h(App)
 .$mount('#app')
