@@ -32,11 +32,13 @@
       @mouseup="onMouseUp"
       @wheel="onWheel"
     >
-      <div class="flipbook-container" :style="{ transform: `scale(${zoom})` }">
-        <div id="flesh">
-          <img src="https://catalogimg.blob.core.windows.net/catalogo2020/cats.png" alt="" id="bone">
-
-        </div>
+      <div class="flipbook-container"  id="flipbook-container" :style="{ transform: `scale(${zoom})` }">
+        
+          <img id="tomate"
+            src="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
+            alt=""
+            class="bone"
+          />
         <!-- <div
           class="click-to-flip left"
           :style="{ cursor: canFlipLeft ? 'pointer' : 'auto' }"
@@ -47,7 +49,10 @@
           :style="{ cursor: canFlipRight ? 'pointer' : 'auto' }"
           @click="flipRight"
         /> -->
-        <div :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }">
+        <div
+          id="container-img"
+          :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }"
+        >
           <img
             class="page fixed"
             :style="{
@@ -56,11 +61,12 @@
               left: xMargin + 'px',
               top: yMargin + 'px',
             }"
+            :id="page - 1"
             :src="pageUrlLoading(leftPage, true)"
             v-if="showLeftPage"
             @load="didLoadImage($event)"
           />
-          <img 
+          <img
             class="page fixed"
             :style="{
               width: pageWidth + 'px',
@@ -68,6 +74,7 @@
               left: viewWidth / 2 + 'px',
               top: yMargin + 'px',
             }"
+            :id="page"
             v-if="showRightPage"
             :src="pageUrlLoading(rightPage, true)"
             @load="didLoadImage($event)"
@@ -358,28 +365,46 @@ export default
     @onResize()
     @zoom = @zooms_[0]
     @goToPage @startPage
-    
+        
     $(document).ready ->
       currentMousePos = 
         x: 360
         y: 360
-      $('#flesh').on "mousemove", (event, page) ->
+      $("div.flesh").on "mousemove", (event) ->
         currentMousePos.x = event.pageX
         currentMousePos.y = event.pageY
-        $('#bone').css '-webkit-mask-position-x', currentMousePos.x - 75
-        $('#bone').css '-webkit-mask-position-y', currentMousePos.y - 75
+        $("img.bone").css '-webkit-mask-position-x', currentMousePos.x - 75
+        $("img.bone").css '-webkit-mask-position-y', currentMousePos.y - 75
         return
       return
     
-
+    this.giveEffect("tomate",'https://catalogimg.blob.core.windows.net/catalogo2020/cats.png')
 
   beforeDestroy: ->
     window.removeEventListener 'resize',  @onResize, passive: true
 
   methods:
-    changeImageBG: (id, url) ->
-      document.getElementById(id).src = url
-      return
+    giveEffect: (idElem, url) ->
+      parentcont = document.getElementById('flipbook-container')
+      divcont = document.createElement("div")
+      imgnew = document.createElement("img")
+      imgmodif = document.getElementById(idElem)
+      divcont.appendChild(imgnew)
+      imgmodif.parentNode.removeChild(imgmodif)
+      parentcont.appendChild(divcont)
+      divcont.setAttribute.id= this.idElem
+      divcont.className += "page fixed"
+      divcont.className += " flesh"
+      divcont.style.width = @pageWidth+'px'
+      divcont.style.height = @pageHeight+'px'
+      divcont.style.top = @yMargin+'px'
+      imgnew.setAttribute("src",url)
+      imgnew.className +=" bone"
+      imgnew.style.width = @pageWidth+'px'
+      imgnew.style.height = @pageHeight+'px'
+      imgnew.style.top = @yMargin+'px'
+      if (parseInt(this.idElem) %2 == 0) then imgnew.style.left = @viewWidth / 2 +'px'
+      imgnew.style.left = (@viewWidth - @pageWidth * @displayedPages) / 2 +'px'
 
     onResize: ->
       viewport = @$refs.viewport
@@ -887,23 +912,22 @@ export default
 </script>
 
 <style scoped>
-#flesh {
+.flesh {
   margin: 0;
   height: auto;
   width: 600px;
-  background: url('https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg') no-repeat;
+  background: url("https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg")
+    no-repeat;
   background-size: 100% auto;
+  box-sizing: border-box;
 }
-#bone{
-
+.bone {
   width: 600px;
   margin: 0;
-  mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/40713/xray-machine.png');
+  mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/40713/xray-machine.png");
   mask-repeat: no-repeat;
   mask-size: 150px;
   cursor: none;
-}
-* {
   box-sizing: border-box;
 }
 

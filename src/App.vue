@@ -4,7 +4,7 @@
     :class="{ 'has-mouse': hasMouse }"
     @touchstart="hasMouse = false"
   >
-    <sidebar-menu :menu="menu">
+    <sidebar-menu :menu="menu" :theme="'white-theme'" :relative="true" >
       <span slot="dropdown-icon"><view-array-icon /></span>
       <span slot="toggle-icon"><view-day /></span>
       <span slot="header" class="icon-company"></span>
@@ -72,9 +72,12 @@ export default
         header: true,
         title: 'Catalogo',
         hiddenOnCollapse: true
+        hidden: true
+        class: ''
+        attributes: {}
       },
       {
-        href: '/',
+        href: '',
         title: 'Capítulos',
         icon: {
           element:'span'
@@ -243,6 +246,7 @@ body {
   background-color: #ffffff;
   color: #302b63;
   overflow: hidden;
+  margin-right: 5px;
 }
 
 .action-bar {
@@ -288,7 +292,7 @@ body {
 }
 
 .flipbook .viewport {
-  width: 90vw;
+  width: 86vw;
   height: calc(100vh - 50px - 40px);
 }
 
