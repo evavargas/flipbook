@@ -11,7 +11,7 @@
         flipLeft,
         flipRight,
         zoomIn,
-        zoomOut,
+        zoomOut
       }"
     />
     <div
@@ -34,11 +34,11 @@
     >
       <div class="flipbook-container"  id="flipbook-container" :style="{ transform: `scale(${zoom})` }">
         
-          <img id="tomate"
-            src="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
+          <!-- <img id="tomate"
+            src='https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg'
             alt=""
             class="bone"
-          />
+          />  -->
         <!-- <div
           class="click-to-flip left"
           :style="{ cursor: canFlipLeft ? 'pointer' : 'auto' }"
@@ -61,7 +61,7 @@
               left: xMargin + 'px',
               top: yMargin + 'px',
             }"
-            :id="page - 1"
+            :id="currentPage"
             :src="pageUrlLoading(leftPage, true)"
             v-if="showLeftPage"
             @load="didLoadImage($event)"
@@ -74,7 +74,7 @@
               left: viewWidth / 2 + 'px',
               top: yMargin + 'px',
             }"
-            :id="page"
+            :id="currentPage +1"
             v-if="showRightPage"
             :src="pageUrlLoading(rightPage, true)"
             @load="didLoadImage($event)"
@@ -110,7 +110,7 @@
               />
             </div>
           </div>
-          <div
+          <!-- <div
             class="bounding-box"
             :style="{
               left: boundingLeft + 'px',
@@ -122,7 +122,7 @@
             @touchstart="onTouchStart"
             @pointerdown="onPointerDown"
             @mousedown="onMouseDown"
-          />
+          /> -->
         </div>
       </div>
     </div>
@@ -365,46 +365,11 @@ export default
     @onResize()
     @zoom = @zooms_[0]
     @goToPage @startPage
-        
-    $(document).ready ->
-      currentMousePos = 
-        x: 360
-        y: 360
-      $("div.flesh").on "mousemove", (event) ->
-        currentMousePos.x = event.pageX
-        currentMousePos.y = event.pageY
-        $("img.bone").css '-webkit-mask-position-x', currentMousePos.x - 75
-        $("img.bone").css '-webkit-mask-position-y', currentMousePos.y - 75
-        return
-      return
-    
-    this.giveEffect("tomate",'https://catalogimg.blob.core.windows.net/catalogo2020/cats.png')
-
+            
   beforeDestroy: ->
     window.removeEventListener 'resize',  @onResize, passive: true
 
   methods:
-    giveEffect: (idElem, url) ->
-      parentcont = document.getElementById('flipbook-container')
-      divcont = document.createElement("div")
-      imgnew = document.createElement("img")
-      imgmodif = document.getElementById(idElem)
-      divcont.appendChild(imgnew)
-      imgmodif.parentNode.removeChild(imgmodif)
-      parentcont.appendChild(divcont)
-      divcont.setAttribute.id= this.idElem
-      divcont.className += "page fixed"
-      divcont.className += " flesh"
-      divcont.style.width = @pageWidth+'px'
-      divcont.style.height = @pageHeight+'px'
-      divcont.style.top = @yMargin+'px'
-      imgnew.setAttribute("src",url)
-      imgnew.className +=" bone"
-      imgnew.style.width = @pageWidth+'px'
-      imgnew.style.height = @pageHeight+'px'
-      imgnew.style.top = @yMargin+'px'
-      if (parseInt(this.idElem) %2 == 0) then imgnew.style.left = @viewWidth / 2 +'px'
-      imgnew.style.left = (@viewWidth - @pageWidth * @displayedPages) / 2 +'px'
 
     onResize: ->
       viewport = @$refs.viewport
@@ -875,6 +840,7 @@ export default
       @firstPage = @currentPage
       @secondPage = @currentPage + 1
       @preloadImages()
+      console.log(this.currentPage)
 
     centerOffset: ->
       return if @animatingCenter
@@ -912,24 +878,6 @@ export default
 </script>
 
 <style scoped>
-.flesh {
-  margin: 0;
-  height: auto;
-  width: 600px;
-  background: url("https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg")
-    no-repeat;
-  background-size: 100% auto;
-  box-sizing: border-box;
-}
-.bone {
-  width: 600px;
-  margin: 0;
-  mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/40713/xray-machine.png");
-  mask-repeat: no-repeat;
-  mask-size: 150px;
-  cursor: none;
-  box-sizing: border-box;
-}
 
 .viewport {
   -webkit-overflow-scrolling: touch;
@@ -996,4 +944,6 @@ export default
   width: 100%;
   height: 100%;
 }
+
+
 </style>

@@ -4,7 +4,7 @@
     :class="{ 'has-mouse': hasMouse }"
     @touchstart="hasMouse = false"
   >
-    <sidebar-menu :menu="menu" :theme="'white-theme'" :relative="true" >
+    <sidebar-menu :menu="menu" :theme="'white-theme'" :relative="true">
       <span slot="dropdown-icon"><view-array-icon /></span>
       <span slot="toggle-icon"><view-day /></span>
       <span slot="header" class="icon-company"></span>
@@ -24,7 +24,7 @@
       @zoom-end="onZoomEnd"
     >
       <div class="action-bar">
-        <left-icon
+        <left-icon id="btn-left"
           class="btn left"
           :class="{ disabled: !flipbook.canFlipLeft }"
           @click="flipbook.flipLeft"
@@ -42,7 +42,7 @@
           :class="{ disabled: !flipbook.canZoomOut }"
           @click="flipbook.zoomOut"
         />
-        <right-icon
+        <right-icon id="btn-right"
           class="btn right"
           :class="{ disabled: !flipbook.canFlipRight }"
           @click="flipbook.flipRight"
@@ -134,12 +134,59 @@ export default
           class:'activity'
         }
       },
+      {
+        href: '/#18',
+        title: 'Apendice 1',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+      },
+      {
+        href: '/#16',
+        title: 'Apendice 2',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+      },
+      {
+        href: '/#16',
+        title: 'Apendice 3',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+      },
     ],
     pages: [],
     pagesHiRes: [],
     hasMouse: true
     pageNum: null
   methods:
+    # giveEffect: (idElem, url, containerElem) ->
+    #   console.log("holi")
+    #   parentcont = document.getElementById(containerElem)
+    #   console.log("tengo el contenedor")
+    #   imgmodif = document.getElementById(idElem)
+    #   console.log("tengo la img a cambiar")
+    #   divcont = document.createElement("div")
+    #   imgnew = document.createElement("img")
+    #   divcont.appendChild(imgnew)
+    #   parentcont.appendChild(divcont)
+    #   divcont.setAttribute("id", idElem)
+    #   console.log(imgmodif)
+    #   imgmodif.parentNode.removeChild(imgmodif)
+    #   console.log("elimine la img a cambiar")
+    #   imgnew.setAttribute("src",url)
+    #   divcont.classList.add("page");
+    #   divcont.classList.add("fixed");
+    #   divcont.classList.add("flesh");
+    #   imgnew.classList.add("page");
+    #   imgnew.classList.add("fixed");
+    #   imgnew.classList.add("bone");
+    #   console.log("bai")
+    
     onFlipLeftStart: (page) -> console.log 'flip-left-start', page
     onFlipLeftEnd: (page) ->
       console.log 'flip-left-end', page
@@ -164,7 +211,7 @@ export default
     setTimeout (=>
       @pages = [
         null
-        'images/cat.png'
+        'images/portada.png'
         'images/cat1.jpg'
         'images/cat2.jpg'
         'images/cat3.png'
@@ -174,17 +221,18 @@ export default
         'images/cat7.png'
         'images/cat8.png'
         'images/cat9.jpg'
-        'images/1.jpg'
+        'images/cat.png'
         'images/2.jpg'
         'images/3.jpg'
         'images/4.jpg'
         'images/5.jpg'
         'images/6.jpg'
+        'images/1.jpg'
         'images/cats.png'
       ]
       @pagesHiRes = [
         null
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat.png'
+        'https://catalogimg.blob.core.windows.net/catalogo2020/portada.png'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat1.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat3.png'
@@ -193,18 +241,21 @@ export default
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat6.gif'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat8.png'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat9.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/1.jpg'
+        'https://catalogimg.blob.core.windows.net/catalogo2020/cat.png'
         'https://catalogimg.blob.core.windows.net/catalogo2020/2.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/3.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/4.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/5.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/6.jpg'
+        'https://catalogimg.blob.core.windows.net/catalogo2020/1.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cats.png'
       ]
     ), 1
 
     window.addEventListener 'hashchange', @setPageFromHash
     @setPageFromHash()
+
+   
 </script>
 
 <style>
@@ -302,5 +353,22 @@ body {
 
 body {
   overflow-x: hidden;
+}
+.flesh {
+  background: url("https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg")
+    no-repeat;
+  background-size: 100% auto;
+  box-sizing: border-box;
+}
+
+.bone {
+  mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/40713/xray-machine.png');
+  -webkit-mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/40713/xray-machine.png');
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-size: 120px;
+  -webkit-mask-size: 120px;
+  cursor: none;
+  box-sizing: border-box;
 }
 </style>

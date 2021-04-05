@@ -1,17 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>flipbook-vue demo</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but flipbook-vue doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>flipbook-vue demo</title>
+  <style>
+    .page {
+      position: absolute;
+      backface-visibility: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but flipbook-vue doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+  <script type="text/javascript">
+    function giveEffect(idElem, url, containerElem) {
+      var currentMousePos = { x: -1, y: -1 };
+      var divcont, imgmodif, imgnew, parentcont;
+      console.log("holi");
+      parentcont = document.getElementById(containerElem);
+      console.log("tengo el contenedor");
+      imgmodif = document.getElementById(idElem);
+      console.log("tengo la img a cambiar");
+      divcont = document.createElement("div");
+      imgnew = document.createElement("img");
+      divcont.insertChildAtIndex(imgnew, 0);
+      parentcont.insertChildAtIndex(divcont, 0);
+      console.log(imgmodif);
+      divcont.classList.add("flesh");
+      imgnew.classList.add("bone");
+      $("div.flesh").css("width", $("#1").css("width"));
+      $("div.flesh").css("height", $("#1").css("height"));
+      $("div.flesh").css("left", $("#1").css("left"));
+      $("div.flesh").css("top", $("#1").css("top"));
+      $("img.bone").css("width", $("div.flesh").css("width"));
+      $("img.bone").css("height", $("div.flesh").css("height"));
+
+      imgmodif.parentNode.removeChild(imgmodif);
+      console.log("elimine la img a cambiar");
+      imgnew.setAttribute("src", url);
+      divcont.classList.add("page");
+      divcont.classList.add("fixed");
+      imgnew.classList.add("page");
+      imgnew.classList.add("fixed");
+      $('div.flesh').mousemove(function (e) {
+        currentMousePos.x = e.pageX;
+        currentMousePos.y = e.pageY;
+        $("img.bone").css('-webkit-mask-position-x', currentMousePos.x - 600);
+        $("img.bone").css('-webkit-mask-position-y', currentMousePos.y - 120);
+      });
+      return console.log("bai");
+      $("#flipbook-container").on ("click", function () {
+        divcont.parentNode.removeChild(divcont);
+        console.log("eliminado")
+        parentcont.insertChildAtIndex(imgmodif, 0)
+      });
+    };
+    
+    
+
+    Element.prototype.insertChildAtIndex = function (child, index) {
+      if (!index) index = 0
+      if (index >= this.children.length) {
+        this.appendChild(child)
+      } else {
+        this.insertBefore(child, this.children[index])
+      }
+    }
+    window.onload = function () { this.giveEffect("1", 'https://catalogimg.blob.core.windows.net/catalogo2020/cats.png', "container-img") }
+
+  </script>
+</body>
+
 </html>
