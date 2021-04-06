@@ -180,7 +180,6 @@ export default
         'images/4.jpg'
         'images/5.jpg'
         'images/6.jpg'
-        'images/cats.png'
       ]
       @pagesHiRes = [
         null
@@ -199,7 +198,6 @@ export default
         'https://catalogimg.blob.core.windows.net/catalogo2020/4.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/5.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/6.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cats.png'
       ]
     ), 1
 
