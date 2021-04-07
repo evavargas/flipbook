@@ -32,11 +32,11 @@
       @mouseup="onMouseUp"
       @wheel="onWheel"
     >
-      <div class="flipbook-container" :style="{ transform: `scale(${zoom})` }">
-        <div id="flesh">
-          <img src="https://catalogimg.blob.core.windows.net/catalogo2020/cats.png" alt="" id="bone">
-
-        </div>
+      <div
+        class="flipbook-container"
+        id="flipbook-container"
+        :style="{ transform: `scale(${zoom})` }"
+      >
         <!-- <div
           class="click-to-flip left"
           :style="{ cursor: canFlipLeft ? 'pointer' : 'auto' }"
@@ -47,7 +47,39 @@
           :style="{ cursor: canFlipRight ? 'pointer' : 'auto' }"
           @click="flipRight"
         /> -->
-        <div :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }">
+        <div
+          id="container-img"
+          :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }"
+        >
+          <EffectLeft
+            class="page fixed"
+            imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3Xray.png"
+            urlbackleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3.png"
+            v-show="page == 4"
+            :style="{
+              width: pageWidth + 'px',
+              height: pageHeight + 'px',
+              left: xMargin + 'px',
+              top: yMargin + 'px',
+              zIndex: 3,
+            }"
+            v-if="showLeftPage"
+          />
+          <EffectRight
+            class="page fixed"
+            imagesrcright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
+            urlbackright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
+            v-show="page == 2"
+            :style="{
+              width: pageWidth + 'px',
+              height: pageHeight + 'px',
+              left: viewWidth / 2 + 'px',
+              top: yMargin + 'px',
+              zIndex: 3,
+            }"
+            v-if="showRightPage"
+          />
+
           <img
             class="page fixed"
             :style="{
@@ -56,11 +88,12 @@
               left: xMargin + 'px',
               top: yMargin + 'px',
             }"
+            :id="page - 1"
             :src="pageUrlLoading(leftPage, true)"
             v-if="showLeftPage"
             @load="didLoadImage($event)"
           />
-          <img 
+          <img
             class="page fixed"
             :style="{
               width: pageWidth + 'px',
@@ -68,6 +101,7 @@
               left: viewWidth / 2 + 'px',
               top: yMargin + 'px',
             }"
+            :id="page"
             v-if="showRightPage"
             :src="pageUrlLoading(rightPage, true)"
             @load="didLoadImage($event)"
@@ -103,7 +137,7 @@
               />
             </div>
           </div>
-          <div
+          <!-- <div
             class="bounding-box"
             :style="{
               left: boundingLeft + 'px',
@@ -115,7 +149,7 @@
             @touchstart="onTouchStart"
             @pointerdown="onPointerDown"
             @mousedown="onMouseDown"
-          />
+          /> -->
         </div>
       </div>
     </div>
@@ -125,6 +159,8 @@
 <script lang="coffee">
 import Matrix from './matrix'
 import spinner from './spinner.svg'
+import EffectLeft from '@/components/EffectLeft.vue'
+import EffectRight from '@/components/EffectRight.vue'
 
 easeIn = (x) -> Math.pow(x, 2)
 easeOut = (x) -> 1 - easeIn(1 - x)
@@ -134,6 +170,7 @@ easeInOut = (x) ->
 IE = /Trident/.test navigator.userAgent
 
 export default
+  components:{EffectLeft, EffectRight}
   props:
     pages:
       type: Array
@@ -358,29 +395,12 @@ export default
     @onResize()
     @zoom = @zooms_[0]
     @goToPage @startPage
-    
-    $(document).ready ->
-      currentMousePos = 
-        x: 360
-        y: 360
-      $('#flesh').on "mousemove", (event, page) ->
-        currentMousePos.x = event.pageX
-        currentMousePos.y = event.pageY
-        $('#bone').css '-webkit-mask-position-x', currentMousePos.x - 75
-        $('#bone').css '-webkit-mask-position-y', currentMousePos.y - 75
-        return
-      return
-    
 
 
   beforeDestroy: ->
     window.removeEventListener 'resize',  @onResize, passive: true
 
   methods:
-    changeImageBG: (id, url) ->
-      document.getElementById(id).src = url
-      return
-
     onResize: ->
       viewport = @$refs.viewport
       return unless viewport
@@ -887,26 +907,6 @@ export default
 </script>
 
 <style scoped>
-#flesh {
-  margin: 0;
-  height: auto;
-  width: 600px;
-  background: url('https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg') no-repeat;
-  background-size: 100% auto;
-}
-#bone{
-
-  width: 600px;
-  margin: 0;
-  mask-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/40713/xray-machine.png');
-  mask-repeat: no-repeat;
-  mask-size: 150px;
-  cursor: none;
-}
-* {
-  box-sizing: border-box;
-}
-
 .viewport {
   -webkit-overflow-scrolling: touch;
   width: 100%;

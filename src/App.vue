@@ -4,7 +4,7 @@
     :class="{ 'has-mouse': hasMouse }"
     @touchstart="hasMouse = false"
   >
-    <sidebar-menu :menu="menu">
+    <sidebar-menu :menu="menu" :theme="'white-theme'" :relative="true" >
       <span slot="dropdown-icon"><view-array-icon /></span>
       <span slot="toggle-icon"><view-day /></span>
       <span slot="header" class="icon-company"></span>
@@ -72,9 +72,12 @@ export default
         header: true,
         title: 'Catalogo',
         hiddenOnCollapse: true
+        hidden: true
+        class: ''
+        attributes: {}
       },
       {
-        href: '/',
+        href: '',
         title: 'Capítulos',
         icon: {
           element:'span'
@@ -92,7 +95,7 @@ export default
             icon: 'fa fa-chart-area',
           },
           {
-            href: '/#8',
+            href: '/#6',
             title: 'Capítulo 3'
             icon: 'fa fa-chart-area',
           }
@@ -125,11 +128,153 @@ export default
       },
       {
         href: '/#16',
-        title: 'Actividad',
+        title: 'Final',
         icon: {
           element:'span'
           class:'activity'
         }
+        child: [
+          {
+            href: '/#16',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#18',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
+      {
+        href: '/#20',
+        title: 'Final II',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
+      {
+        href: '/#20',
+        title: 'Final III',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
+      {
+        href: '/#20',
+        title: 'Final IV',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
+      {
+        href: '/#20',
+        title: 'Final V',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
+      {
+        href: '/#20',
+        title: 'Final VI',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
       },
     ],
     pages: [],
@@ -161,7 +306,7 @@ export default
     setTimeout (=>
       @pages = [
         null
-        'images/cat.png'
+        'images/front.png'
         'images/cat1.jpg'
         'images/cat2.jpg'
         'images/cat3.png'
@@ -171,32 +316,39 @@ export default
         'images/cat7.png'
         'images/cat8.png'
         'images/cat9.jpg'
-        'images/1.jpg'
-        'images/2.jpg'
-        'images/3.jpg'
-        'images/4.jpg'
-        'images/5.jpg'
-        'images/6.jpg'
-        'images/cats.png'
+        'images/cat10.png'
+        'images/cat11.png'
+        'images/cat12.png'
+        'images/land1.jpg'
+        'images/land2.jpg'
+        'images/land3.jpg'
+        'images/land4.jpg'
+        'images/land5.jpg'
+        'images/land6.jpg'
+        'images/back.png'
       ]
       @pagesHiRes = [
         null
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat.png'
+        'https://catalogimg.blob.core.windows.net/catalogo2020/front.png'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat1.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat3.png'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat4.png'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat5.jpg'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat6.gif'
+        'https://catalogimg.blob.core.windows.net/catalogo2020/cat7.png'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat8.png'
         'https://catalogimg.blob.core.windows.net/catalogo2020/cat9.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/1.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/2.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/3.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/4.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/5.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/6.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cats.png'
+        'https://catalogimg.blob.core.windows.net/catalogo2020/cat10.png'
+        'https://catalogimg.blob.core.windows.net/catalogo2020/cat11.png'
+        'https://catalogimg.blob.core.windows.net/catalogo2020/cat12.png'
+        'images-large/1.jpg'
+        'images-large/2.jpg'
+        'images-large/3.jpg'
+        'images-large/4.jpg'
+        'images-large/5.jpg'
+        'images-large/6.jpg'
+        'https://catalogimg.blob.core.windows.net/catalogo2020/back.png'
       ]
     ), 1
 
@@ -243,6 +395,7 @@ body {
   background-color: #ffffff;
   color: #302b63;
   overflow: hidden;
+  margin-right: 5px;
 }
 
 .action-bar {
@@ -288,7 +441,7 @@ body {
 }
 
 .flipbook .viewport {
-  width: 90vw;
+  width: 86vw;
   height: calc(100vh - 50px - 40px);
 }
 
