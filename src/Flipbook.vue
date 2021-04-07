@@ -51,16 +51,32 @@
           id="container-img"
           :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }"
         >
-          <Effect  class="page fixed"
+          <EffectLeft  class="page fixed"
         imageSrc='https://catalogimg.blob.core.windows.net/catalogo2020/cats.png'
         v-show="page==4"
+        :style="{
+              width: pageWidth + 'px',
+              height: pageHeight + 'px',
+              left: xMargin + 'px',
+              top: yMargin + 'px',
+              zIndex:3
+            }"
+            v-if="showLeftPage"
+            @load="didLoadImage($event)"
+            />
+            <EffectRight  class="page fixed"
+        imageSrc='https://catalogimg.blob.core.windows.net/catalogo2020/cats.png'
+        v-show="page==6"
         :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
               left: viewWidth / 2 + 'px',
               top: yMargin + 'px',
               zIndex:3
-            }"/>
+            }"
+            v-if="showRightPage"
+            @load="didLoadImage($event)"
+            />
           <img
             class="page fixed"
             :style="{
@@ -140,7 +156,8 @@
 <script lang="coffee">
 import Matrix from './matrix'
 import spinner from './spinner.svg'
-import Effect from '@/components/Effect.vue'
+import EffectLeft from '@/components/EffectLeft.vue'
+import EffectRight from '@/components/EffectRight.vue'
 
 easeIn = (x) -> Math.pow(x, 2)
 easeOut = (x) -> 1 - easeIn(1 - x)
@@ -150,7 +167,7 @@ easeInOut = (x) ->
 IE = /Trident/.test navigator.userAgent
 
 export default
-  components:{Effect}
+  components:{EffectLeft, EffectRight}
   props:
     pages:
       type: Array
