@@ -51,32 +51,34 @@
           id="container-img"
           :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }"
         >
-          <EffectLeft  class="page fixed"
-        imageSrc='https://catalogimg.blob.core.windows.net/catalogo2020/cats.png'
-        v-show="page==4"
-        :style="{
-              width: pageWidth + 'px',
-              height: pageHeight + 'px',
-              left: xMargin + 'px',
-              top: yMargin + 'px',
-              zIndex:3
-            }"
-            v-if="showLeftPage"
-            @load="didLoadImage($event)"
-            />
-            <EffectRight  class="page fixed"
-        imageSrc='https://catalogimg.blob.core.windows.net/catalogo2020/cats.png'
-        v-show="page==6"
-        :style="{
+          <EffectRight
+            class="page fixed"
+            imagesrcright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
+            urlbackright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
+            v-show="page == 2"
+            :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
               left: viewWidth / 2 + 'px',
               top: yMargin + 'px',
-              zIndex:3
+              zIndex: 3,
             }"
             v-if="showRightPage"
-            @load="didLoadImage($event)"
-            />
+          />
+          <EffectLeft
+            class="page fixed"
+            imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3Xray.png"
+            urlbackleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3.png"
+            v-show="page == 4"
+            :style="{
+              width: pageWidth + 'px',
+              height: pageHeight + 'px',
+              left: xMargin + 'px',
+              top: yMargin + 'px',
+              zIndex: 3,
+            }"
+            v-if="showLeftPage"
+          />
           <img
             class="page fixed"
             :style="{
@@ -904,7 +906,6 @@ export default
 </script>
 
 <style scoped>
-
 .viewport {
   -webkit-overflow-scrolling: touch;
   width: 100%;

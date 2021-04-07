@@ -1,6 +1,6 @@
 <template>
-  <div class="fleshright">
-    <img :src="imageSrc" class="boneright" />
+  <div class="fleshright" :style="{ 'background-image': 'url(' + urlbackright + ')' }">
+    <img :src="imagesrcright" class="boneright" />
   </div>
 </template>
 
@@ -8,7 +8,9 @@
 
 export default {
   props: {
-    imageSrc: String
+    imagesrcright: String,
+    urlbackright: String
+
   },
   computed:{
 
@@ -23,7 +25,7 @@ export default {
                   console.log("on")
                   currentMousePos.x = e.pageX;
                   currentMousePos.y = e.pageY;
-                $('img.boneright').css('-webkit-mask-position-x', currentMousePos.x -400);
+                $('img.boneright').css('-webkit-mask-position-x', currentMousePos.x -700);
                 $('img.boneright').css('-webkit-mask-position-y', currentMousePos.y -180)
               });
           })
@@ -33,13 +35,12 @@ export default {
 
 <style scoped >
 .fleshright {
-  background: url("https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg");
   background-repeat: no-repeat;
   background-size: 100% auto;
   box-sizing: border-box;
 }
 .boneright {
-  mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/40713/xray-machine.png");
+  mask-image: url(../../src/assets/effects/xray.png);
   mask-repeat: no-repeat;
   mask-size: 150px;
   cursor: none;

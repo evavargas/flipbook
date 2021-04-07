@@ -1,6 +1,6 @@
 <template>
-  <div class="fleshleft">
-    <img :src="imageSrc" class="boneleft" />
+  <div class="fleshleft" :style="{ 'background-image': 'url(' + urlbackleft + ')' }">
+    <img :src="imagesrcleft" class="boneleft" />
   </div>
 </template>
 
@@ -8,7 +8,8 @@
 
 export default {
   props: {
-    imageSrc: String
+    imagesrcleft: String,
+    urlbackleft: String
   },
   computed:{
 
@@ -23,8 +24,8 @@ export default {
                   console.log("on")
                   currentMousePos.x = e.pageX;
                   currentMousePos.y = e.pageY;
-                $('img.boneleft').css('-webkit-mask-position-x', currentMousePos.x -400);
-                $('img.boneleft').css('-webkit-mask-position-y', currentMousePos.y -180)
+                $('img.boneleft').css('-webkit-mask-position-x', currentMousePos.x -180);
+                $('img.boneleft').css('-webkit-mask-position-y', currentMousePos.y -240)
               });
           })
   }
@@ -33,13 +34,12 @@ export default {
 
 <style scoped >
 .fleshleft {
-  background: url("https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg");
   background-repeat: no-repeat;
   background-size: 100% auto;
   box-sizing: border-box;
 }
 .boneleft {
-  mask-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/40713/xray-machine.png");
+  mask-image: url(../../src/assets/effects/xray.png);
   mask-repeat: no-repeat;
   mask-size: 150px;
   cursor: none;
