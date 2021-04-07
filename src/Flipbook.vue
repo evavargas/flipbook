@@ -51,20 +51,6 @@
           id="container-img"
           :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }"
         >
-          <EffectRight
-            class="page fixed"
-            imagesrcright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
-            urlbackright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
-            v-show="page == 2"
-            :style="{
-              width: pageWidth + 'px',
-              height: pageHeight + 'px',
-              left: viewWidth / 2 + 'px',
-              top: yMargin + 'px',
-              zIndex: 3,
-            }"
-            v-if="showRightPage"
-          />
           <EffectLeft
             class="page fixed"
             imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3Xray.png"
@@ -79,6 +65,21 @@
             }"
             v-if="showLeftPage"
           />
+          <EffectRight
+            class="page fixed"
+            imagesrcright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
+            urlbackright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
+            v-show="page == 2"
+            :style="{
+              width: pageWidth + 'px',
+              height: pageHeight + 'px',
+              left: viewWidth / 2 + 'px',
+              top: yMargin + 'px',
+              zIndex: 3,
+            }"
+            v-if="showRightPage"
+          />
+
           <img
             class="page fixed"
             :style="{

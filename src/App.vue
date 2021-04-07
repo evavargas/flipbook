@@ -151,6 +151,131 @@ export default
           }
         ]
       },
+      {
+        href: '/#20',
+        title: 'Final II',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
+      {
+        href: '/#20',
+        title: 'Final III',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
+      {
+        href: '/#20',
+        title: 'Final IV',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
+      {
+        href: '/#20',
+        title: 'Final V',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
+      {
+        href: '/#20',
+        title: 'Final VI',
+        icon: {
+          element:'span'
+          class:'activity'
+        }
+        child: [
+          {
+            href: '/#20',
+            title: 'Aclaraciones'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Referencias'
+            icon: 'fa fa-chart-area',
+          },
+          {
+            href: '/#20',
+            title: 'Glosario'
+            icon: 'fa fa-chart-area',
+          }
+        ]
+      },
     ],
     pages: [],
     pagesHiRes: [],
