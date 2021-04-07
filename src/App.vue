@@ -4,6 +4,16 @@
     :class="{ 'has-mouse': hasMouse }"
     @touchstart="hasMouse = false"
   >
+  
+  <Modal v-if="showModal" @close="showModal = false">
+    <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+    <template v-slot:header>
+      <h3>custom header</h3>
+    </template>
+  </Modal>
     <sidebar-menu :menu="menu" :theme="'white-theme'" :relative="true" >
       <span slot="dropdown-icon"><view-array-icon /></span>
       <span slot="toggle-icon"><view-day /></span>
@@ -24,6 +34,11 @@
       @zoom-end="onZoomEnd"
     >
       <div class="action-bar">
+        <expand-icon
+        class="btn"
+        id="show-modal" 
+        @click="showModal = true"
+         />
         <left-icon
           class="btn left"
           :class="{ disabled: !flipbook.canFlipLeft }"
@@ -54,6 +69,7 @@
 
 <script lang="coffee">
 import 'vue-material-design-icons/styles.css'
+import ExpandIcon from 'vue-material-design-icons/ArrowExpandAll'
 import LeftIcon from 'vue-material-design-icons/ChevronLeftCircle'
 import RightIcon from 'vue-material-design-icons/ChevronRightCircle'
 import PlusIcon from 'vue-material-design-icons/PlusCircle'
@@ -61,12 +77,13 @@ import MinusIcon from 'vue-material-design-icons/MinusCircle'
 import Flipbook from './Flipbook'
 import ViewArrayIcon from 'vue-material-design-icons/ViewArray.vue';
 import ViewDay from 'vue-material-design-icons/ViewDay';
-
+import Modal from '@/components/Modal.vue'
 
 export default
   name: 'app'
-  components: {ViewDay, ViewArrayIcon, Flipbook, LeftIcon, RightIcon, PlusIcon, MinusIcon }
+  components: {ExpandIcon, Modal,ViewDay, ViewArrayIcon, Flipbook, LeftIcon, RightIcon, PlusIcon, MinusIcon }
   data: ->
+    showModal:true
     menu: [
       {
         header: true,
