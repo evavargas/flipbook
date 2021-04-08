@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: 'https://flipbook.azurewebsites.net',
+  publicPath: '/',
   css: {
     extract: false
   },
