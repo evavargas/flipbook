@@ -417,6 +417,7 @@ body {
   color: #302b63;
   overflow: hidden;
   margin-right: 5px;
+  margin-left: 8px;
 }
 
 .action-bar {
