@@ -159,8 +159,8 @@
 <script lang="coffee">
 import Matrix from './matrix'
 import spinner from './spinner.svg'
-import EffectLeft from '@/components/EffectLeft.vue'
-import EffectRight from '@/components/EffectRight.vue'
+import EffectLeft from './components/EffectLeft.vue'
+import EffectRight from './components/EffectRight.vue'
 
 easeIn = (x) -> Math.pow(x, 2)
 easeOut = (x) -> 1 - easeIn(1 - x)
