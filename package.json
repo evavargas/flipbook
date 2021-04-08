@@ -1,5 +1,5 @@
 {
-  "name": "flipbook",
+  "name": "catalogo",
   "version": "0.1.0",
   "keywords": [
     "vue",
@@ -14,6 +14,7 @@
     "coffeescript2",
     "gatalogo",
     "sidebar-vue"
+
   ],
   "main": "dist/flipbook.cjs.js",
   "module": "dist/flipbook.es.js",
