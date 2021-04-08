@@ -48,4 +48,10 @@ export default {
   width: inherit;
   height: inherit;
 }
+
+@media screen and (max-width: 600px){
+  .boneright{
+    mask-size: 80px;
+  }
+}
 </style>

@@ -47,4 +47,9 @@ export default {
   width: inherit;
   height: inherit;
 }
+@media screen and (max-width: 600px){
+  .boneleft{
+    mask-size: 80px;
+  }
+}
 </style>
