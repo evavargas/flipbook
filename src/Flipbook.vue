@@ -51,20 +51,6 @@
           id="container-img"
           :style="{ transform: `translateX(${centerOffsetSmoothed}px)` }"
         >
-          <EffectLeft
-            class="page fixed"
-            imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3Xray.png"
-            urlbackleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3.png"
-            v-show="page == 4"
-            :style="{
-              width: pageWidth + 'px',
-              height: pageHeight + 'px',
-              left: xMargin + 'px',
-              top: yMargin + 'px',
-              zIndex: 3,
-            }"
-            v-if="showLeftPage"
-          />
           <EffectRight
             class="page fixed"
             imagesrcright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
@@ -78,6 +64,36 @@
               zIndex: 3,
             }"
             v-if="showRightPage"
+          />
+          <!--Si no corresponde rigth, muestra el left-->
+          <EffectLeft
+            class="page fixed"
+            imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
+            urlbackleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
+            :style="{
+              width: pageWidth + 'px',
+              height: pageHeight + 'px',
+              left: xMargin + 'px',
+              top: yMargin + 'px',
+              zIndex: 3,
+            }"
+            v-if="showLeftPage"
+            v-show="page == 3"
+          />
+          <!---Corresponde a una pagina izquierda por defecto-->
+          <EffectLeft
+            class="page fixed"
+            imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3Xray.png"
+            urlbackleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3.png"
+            v-show="page == 4"
+            :style="{
+              width: pageWidth + 'px',
+              height: pageHeight + 'px',
+              left: xMargin + 'px',
+              top: yMargin + 'px',
+              zIndex: 3,
+            }"
+            v-if="showLeftPage"
           />
 
           <img
