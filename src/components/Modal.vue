@@ -3,19 +3,25 @@
     <div class="modal-wrapper">
       <div class="modal-container">
         <div class="modal-header">
-          <slot name="header"> default header </slot>
+          <slot name="header"> Para continuar, habilite la pantalla completa o presione la tecla F11 </slot>
         </div>
 
         <div class="modal-body">
           <slot name="body">
-            <button @click="fullScreen">Habilitar Pantalla Completa</button>
+            <button @click="fullScreen" style="background-color: #614389; color: white">Habilitar Pantalla Completa
+            <monitor-icon
+           @click="fullScreen = true" 
+        id="show-modal" 
+       
+         />
+         </button>
           </slot>
         </div>
 
         <div class="modal-footer">
           <slot name="footer">
-            default footer
-            <button class="modal-default-button" @click="$emit('close')">
+            para desactivar, presione nuevamente F11
+            <button  style="background-color: #614389; color: white" class="modal-default-button" @click="$emit('close')">
               OK
             </button>
           </slot>
@@ -26,6 +32,9 @@
 </template>
 
 <script>
+
+import MonitorIcon from 'vue-material-design-icons/MonitorScreenshot'
+
 export default {
 methods:{
     fullScreen() {
@@ -34,7 +43,10 @@ methods:{
             elem.requestFullscreen();
         }
     }
-}    
+},
+components:{
+  MonitorIcon
+}
 }
 
 </script>
@@ -71,9 +83,10 @@ methods:{
   font-family: Helvetica, Arial, sans-serif;
 }
 
-.modal-header h3 {
+.modal-header, .modal-footer {
   margin-top: 0;
-  color: #42b983;
+  color: #614389;
+  font-size: 14px;
 }
 
 .modal-body {

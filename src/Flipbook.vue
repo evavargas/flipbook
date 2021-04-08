@@ -137,7 +137,7 @@
               />
             </div>
           </div>
-          <!-- <div
+          <div
             class="bounding-box"
             :style="{
               left: boundingLeft + 'px',
@@ -149,7 +149,7 @@
             @touchstart="onTouchStart"
             @pointerdown="onPointerDown"
             @mousedown="onMouseDown"
-          /> -->
+          /> 
         </div>
       </div>
     </div>
