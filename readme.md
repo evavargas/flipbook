@@ -1,3 +1,3 @@
 Gatalogo
-Visualizador de imagenes y gif con efectos de rayos X.
-Hecho con 🐈
+flipbook-vue + sidebar-vue
+--> Efectos de img

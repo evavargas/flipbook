@@ -1,6 +1,11 @@
 {
-  "name": "catalogo",
-  "version": "0.1.0",
+  "name": "flipbook-vue",
+  "version": "0.10.2",
+  "license": "MIT",
+  "description": "3D page flip effect for Vue.js",
+  "homepage": "https://ts1.github.io/flipbook-vue/",
+  "author": "Takeshi Sone <takeshi.sone@gmail.com> (https://github.com/ts1)",
+  "repository": "github:ts1/flipbook-vue",
   "keywords": [
     "vue",
     "flipbook",
@@ -11,10 +16,7 @@
     "turn",
     "3d",
     "coffeescript",
-    "coffeescript2",
-    "gatalogo",
-    "sidebar-vue"
-
+    "coffeescript2"
   ],
   "main": "dist/flipbook.cjs.js",
   "module": "dist/flipbook.es.js",
@@ -24,7 +26,7 @@
   },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --dest demo",
+    "build": "vue-cli-service build",
     "dist": "rollup -c rollup.config.js"
   },
   "dependencies": {
