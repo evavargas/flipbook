@@ -29,7 +29,7 @@ jobs:
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'flipbook'
+        app-name: 'catalogo'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_d52c53d069d341d8996820b1f357ccea }}
         package: .
