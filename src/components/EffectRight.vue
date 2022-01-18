@@ -1,39 +1,50 @@
 <template>
-  <div class="fleshright" :style="{ 'background-image': 'url(' + urlbackright + ')' }">
+  <div
+    class="fleshright"
+    :style="{ 'background-image': 'url(' + urlbackright + ')' }"
+  >
     <img :src="imagesrcright" class="boneright" />
   </div>
 </template>
 
 <script>
-
 export default {
   props: {
     imagesrcright: String,
-    urlbackright: String
-
+    urlbackright: String,
   },
-  computed:{
-
+  computed: {},
+  methods: {},
+  created: function () {
+    $(document).ready(function () {
+      var currentMousePos = { x: -1, y: -1 };
+      $("div.fleshright").mousemove(function (e) {
+        console.log("on");
+        currentMousePos.x = e.pageX;
+        currentMousePos.y = e.pageY;
+        $("img.boneright").css(
+          "-webkit-mask-position-x",
+          currentMousePos.x - 700
+        );
+        $("img.boneright").css(
+          "-webkit-mask-position-y",
+          currentMousePos.y - 180
+        );
+      });
+    });
   },
-  methods:{
-
+  beforeUpdate: function () {
+    var element = document.getElementsByClassName('fleshright')[0];
+    console.log(element)
+    element.className+="visibilityOff";
   },
-  mounted: function (){
-      $(document).ready(function(){
-              var currentMousePos = { x: -1, y: -1 };
-              $('div.fleshright').mousemove(function(e) {
-                  console.log("on")
-                  currentMousePos.x = e.pageX;
-                  currentMousePos.y = e.pageY;
-                $('img.boneright').css('-webkit-mask-position-x', currentMousePos.x -700);
-                $('img.boneright').css('-webkit-mask-position-y', currentMousePos.y -180)
-              });
-          })
-  }
 };
 </script>
 
 <style scoped >
+.visibilityOff {
+  display: none;
+}
 .fleshright {
   background-repeat: no-repeat;
   background-size: 100% auto;
@@ -48,9 +59,8 @@ export default {
   width: inherit;
   height: inherit;
 }
-
-@media screen and (max-width: 600px){
-  .boneright{
+@media screen and (max-width: 600px) {
+  .boneright {
     mask-size: 80px;
   }
 }

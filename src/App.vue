@@ -78,7 +78,6 @@ import Flipbook from './Flipbook'
 import ViewArrayIcon from 'vue-material-design-icons/ViewArray.vue';
 import ViewDay from 'vue-material-design-icons/ViewDay';
 import Modal from '@/components/Modal.vue'
-
 export default
   name: 'app'
   components: {MonitorIcon, Modal,ViewDay, ViewArrayIcon, Flipbook, LeftIcon, RightIcon, PlusIcon, MinusIcon }
@@ -302,7 +301,6 @@ export default
     fullScreen: ->
         elem = document.getElementById("app")
         if (elem.requestFullscreen) then elem.requestFullscreen()
-
     onFlipLeftStart: (page) -> console.log 'flip-left-start', page
     onFlipLeftEnd: (page) ->
       console.log 'flip-left-end', page
@@ -322,57 +320,41 @@ export default
       return unless flipbook
       flipbook.flipLeft() if ev.keyCode == 37 and flipbook.canFlipLeft
       flipbook.flipRight() if ev.keyCode == 39 and flipbook.canFlipRight
-
     # Simulate asynchronous pages initialization
     setTimeout (=>
       @pages = [
         null
-        'images/front.png'
-        'images/cat1.jpg'
-        'images/cat2.jpg'
-        'images/cat3.png'
-        'images/cat4.png'
-        'images/cat5.jpg'
-        'images/cat6.gif'
-        'images/cat7.png'
-        'images/cat8.png'
-        'images/cat9.jpg'
-        'images/cat10.png'
-        'images/cat11.png'
-        'images/cat12.png'
-        'images/land1.jpg'
-        'images/land2.jpg'
-        'images/land3.jpg'
-        'images/land4.jpg'
-        'images/land5.jpg'
-        'images/land6.jpg'
-        'images/back.png'
+        'images/gatalogo/front.png'
+        'images/gatalogo/cat1.jpg'
+        'images/gatalogo/cat2.jpg'
+        'images/gatalogo/cat3.png'
+        'images/gatalogo/cat4.png'
+        'images/gatalogo/cat5.jpg'
+        'images/gatalogo/cat6.gif'
+        'images/gatalogo/cat7.png'
+        'images/gatalogo/cat8.png'
+        'images/gatalogo/cat9.jpg'
+        'images/gatalogo/cat10.png'
+        'images/gatalogo/cat11.png'
+        'images/gatalogo/cat12.png'
       ]
       @pagesHiRes = [
         null
-        'https://catalogimg.blob.core.windows.net/catalogo2020/front.png'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat1.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat3.png'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat4.png'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat5.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat6.gif'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat7.png'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat8.png'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat9.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat10.png'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat11.png'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/cat12.png'
-        'images-large/1.jpg'
-        'images-large/2.jpg'
-        'images-large/3.jpg'
-        'images-large/4.jpg'
-        'images-large/5.jpg'
-        'images-large/6.jpg'
-        'https://catalogimg.blob.core.windows.net/catalogo2020/back.png'
+        'images/gatalogo/front.png'
+        'images/gatalogo/cat1.jpg'
+        'images/gatalogo/cat2.jpg'
+        'images/gatalogo/cat3.png'
+        'images/gatalogo/cat4.png'
+        'images/gatalogo/cat5.jpg'
+        'images/gatalogo/cat6.gif'
+        'images/gatalogo/cat7.png'
+        'images/gatalogo/cat8.png'
+        'images/gatalogo/cat9.jpg'
+        'images/gatalogo/cat10.png'
+        'images/gatalogo/cat11.png'
+        'images/gatalogo/cat12.png'
       ]
     ), 1
-
     window.addEventListener 'hashchange', @setPageFromHash
     @setPageFromHash()
 </script>
@@ -383,7 +365,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 .chapter {
   background-image: url(./assets/icons/book.png);
   background-position: center;
@@ -404,7 +385,6 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
 }
-
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -419,7 +399,6 @@ body {
   margin-right: 5px;
   margin-left: 8px;
 }
-
 .action-bar {
   width: 100%;
   height: 30px;
@@ -428,49 +407,39 @@ body {
   justify-content: center;
   align-items: center;
 }
-
 .action-bar .btn {
   font-size: 30px;
   color: #614389;
 }
-
 .action-bar .btn svg {
   bottom: 0;
 }
-
 .action-bar .btn:not(:first-child) {
   margin-left: 10px;
 }
-
 .has-mouse .action-bar .btn:hover {
   color: #b882ff;
   filter: drop-shadow(1px 1px 5px #000);
   cursor: pointer;
 }
-
 .action-bar .btn:active {
   filter: none !important;
 }
-
 .action-bar .btn.disabled {
   color: #a284c9;
   pointer-events: none;
 }
-
 .action-bar .page-num {
   font-size: 12px;
   margin-left: 10px;
 }
-
 .flipbook .viewport {
   width: 86vw;
   height: calc(100vh - 50px - 40px);
 }
-
 .flipbook .bounding-box {
   box-shadow: 0 0 20px #000;
 }
-
 body {
   overflow-x: hidden;
 }

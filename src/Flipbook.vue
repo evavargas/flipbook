@@ -53,9 +53,9 @@
         >
           <EffectRight
             class="page fixed"
-            imagesrcright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
-            urlbackright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
-            v-show="page == 2"
+            imagesrcright="/images/gatalogo/cat2Xray.png"
+            urlbackright="/images/gatalogo/cat2.jpg"
+            v-if="(page == 2) & showRightPage "
             :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
@@ -63,13 +63,13 @@
               top: yMargin + 'px',
               zIndex: 3,
             }"
-            v-if="showRightPage"
           />
           <!--Si no corresponde rigth, muestra el left-->
           <EffectLeft
             class="page fixed"
-            imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
-            urlbackleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
+            imagesrcleft="/images/gatalogo/cat2Xray.png"
+            urlbackleft="/images/gatalogo/cat2.jpg"
+            v-if="(page == 3) & showLeftPage"
             :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
@@ -77,15 +77,13 @@
               top: yMargin + 'px',
               zIndex: 3,
             }"
-            v-if="showLeftPage"
-            v-show="page == 3"
           />
           <!---Corresponde a una pagina izquierda por defecto-->
           <EffectLeft
             class="page fixed"
-            imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3Xray.png"
-            urlbackleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3.png"
-            v-show="page == 4"
+            imagesrcleft="/images/gatalogo/cat3Xray.png"
+            urlbackleft="/images/gatalogo/cat3.png"
+            v-if="(page == 4) & showLeftPage"
             :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
@@ -93,9 +91,7 @@
               top: yMargin + 'px',
               zIndex: 3,
             }"
-            v-if="showLeftPage"
           />
-
           <img
             class="page fixed"
             :style="{
@@ -177,14 +173,11 @@ import Matrix from './matrix'
 import spinner from './spinner.svg'
 import EffectLeft from './components/EffectLeft.vue'
 import EffectRight from './components/EffectRight.vue'
-
 easeIn = (x) -> Math.pow(x, 2)
 easeOut = (x) -> 1 - easeIn(1 - x)
 easeInOut = (x) ->
   if (x < 0.5) then easeIn(x * 2) / 2 else 0.5 + easeOut((x - 0.5) * 2) / 2
-
 IE = /Trident/.test navigator.userAgent
-
 export default
   components:{EffectLeft, EffectRight}
   props:
@@ -233,7 +226,6 @@ export default
     loadingImage:
       type: String
       default: spinner
-
   data: ->
     currentMousePos:{x:0,y:0}
     event:{}
@@ -274,7 +266,6 @@ export default
     scrollLeft: 0
     scrollTop: 0
     loadedImages: {}
-
   computed:
     canFlipLeft: ->
       if @forwardDirection == 'left' then @canGoForward else @canGoBack
@@ -288,9 +279,7 @@ export default
         @currentPage + 1
       else
         Math.max 1, @currentPage
-
     zooms_: -> @zooms or [1]
-
     canGoForward: ->
       not @flip.direction and @currentPage < @pages.length - @displayedPages
     canGoBack: ->
@@ -307,7 +296,6 @@ export default
       @pageUrl(@leftPage)
     showRightPage: ->
       @pageUrl(@rightPage) and @displayedPages == 2
-
     cursor: ->
       if @activeCursor
         @activeCursor
@@ -319,7 +307,6 @@ export default
         'zoom-out'
       else
         'grab'
-
     pageScale: ->
       vw = @viewWidth / @displayedPages
       xScale = vw / @imageWidth
@@ -367,55 +354,43 @@ export default
       if @currentCenterOffset == null and @imageWidth != null
         @currentCenterOffset = retval
       retval
-
     centerOffsetSmoothed: -> Math.round(@currentCenterOffset)
-
     dragToScroll: -> not @hasTouchEvents
-
     scrollLeftMin: ->
       w = (@boundingRight - @boundingLeft) * @zoom
       if w < @viewWidth
         (@boundingLeft + @centerOffsetSmoothed) * @zoom - (@viewWidth - w) / 2
       else
         (@boundingLeft + @centerOffsetSmoothed) * @zoom
-
     scrollLeftMax: ->
       w = (@boundingRight - @boundingLeft) * @zoom
       if w < @viewWidth
         (@boundingLeft + @centerOffsetSmoothed) * @zoom - (@viewWidth - w) / 2
       else
         (@boundingRight + @centerOffsetSmoothed)* @zoom - @viewWidth
-
     scrollTopMin: ->
       h = @pageHeight * @zoom
       if h < @viewHeight
         @yMargin * @zoom - (@viewHeight - h) / 2
       else
         @yMargin * @zoom
-
     scrollTopMax: ->
       h = @pageHeight * @zoom
       if h < @viewHeight
         @yMargin * @zoom - (@viewHeight - h) / 2
       else
         (@yMargin + @pageHeight) * @zoom - @viewHeight
-
     scrollLeftLimited: ->
       Math.min(@scrollLeftMax, Math.max(@scrollLeftMin, @scrollLeft))
-
     scrollTopLimited: ->
       Math.min(@scrollTopMax, Math.max(@scrollTopMin, @scrollTop))
-
   mounted: ->
     window.addEventListener 'resize',  @onResize, passive: true
     @onResize()
     @zoom = @zooms_[0]
     @goToPage @startPage
-
-
   beforeDestroy: ->
     window.removeEventListener 'resize',  @onResize, passive: true
-
   methods:
     onResize: ->
       viewport = @$refs.viewport
@@ -428,57 +403,45 @@ export default
       @fixFirstPage()
       @minX = Infinity
       @maxX = -Infinity
-
     fixFirstPage: ->
       @currentPage++ if @displayedPages == 1 and
         @currentPage == 0 and
         @pages.length and
         not @pageUrl(0)
-
     pageUrl: (page, hiRes=false) ->
       if hiRes and @zoom > 1 and not @zooming
         url = @pagesHiRes[page]
         return url if url
       @pages[page] or null
-
     pageUrlLoading: (page, hiRes=false) ->
       url = @pageUrl(page, hiRes)
       # High-res image doesn't use 'loading'
       return url if hiRes and @zoom > 1 and not @zooming
       url and @loadImage url
-
     flipLeft: ->
       return unless @canFlipLeft
       @flipStart 'left', true
-
     flipRight: ->
       return unless @canFlipRight
       @flipStart 'right', true
-
     makePolygonArray: (face) ->
       return [] unless @flip.direction
-
       progress = @flip.progress
       direction = @flip.direction
-
       if @displayedPages == 1 and direction != @forwardDirection
         progress = 1 - progress
         direction = @forwardDirection
-
       @flip.opacity =
         if @displayedPages == 1 and progress > .7
           1 - (progress - .7) / .3
         else
           1
-
       image =
         if face == 'front'
           @flip.frontImage
         else
           @flip.backImage
-
       polygonWidth = @pageWidth / @nPolygons
-
       pageX = @xMargin
       originRight = false
       if @displayedPages == 1
@@ -508,25 +471,21 @@ export default
             pageX = @viewWidth / 2
           else
             originRight = true
-
       pageMatrix = new Matrix
       pageMatrix.translate @viewWidth / 2
       pageMatrix.perspective @perspective
       pageMatrix.translate -@viewWidth / 2
       pageMatrix.translate pageX, @yMargin
-
       pageRotation = 0
       if progress > 0.5
         pageRotation = -(progress - 0.5) * 2 * 180
       if direction == 'left'
         pageRotation = -pageRotation
       pageRotation += 180 if face == 'back'
-
       if pageRotation
         pageMatrix.translate @pageWidth if originRight
         pageMatrix.rotateY pageRotation
         pageMatrix.translate -@pageWidth if originRight
-
       if progress < 0.5
         theta = progress * 2 * Math.PI
       else
@@ -534,45 +493,35 @@ export default
       if theta == 0
         theta = 1e-9
       radius = @pageWidth / theta
-
       radian = 0
       dRadian = theta / @nPolygons
       rotate = dRadian / 2 / Math.PI * 180
       dRotate = dRadian / Math.PI * 180
-
       if originRight
         rotate = -theta / Math.PI * 180 + dRotate / 2
-
       if face == 'back'
         rotate = -rotate
         dRotate = -dRotate
-
       @minX = Infinity
       @maxX = -Infinity
       for i in [0...@nPolygons]
         bgPos = "#{i / (@nPolygons - 1) * 100}% 0px"
-
         m = pageMatrix.clone()
         rad = if originRight then theta - radian else radian
         x = Math.sin(rad) * radius
         x = @pageWidth - x if originRight
         z = (1 - Math.cos(rad)) * radius
         z = -z if face == 'back'
-
         m.translate3d x, 0, z
         m.rotateY -rotate
-
         x0 = m.transformX 0
         x1 = m.transformX polygonWidth
         @maxX = Math.max Math.max(x0, x1), @maxX
         @minX = Math.min Math.min(x0, x1), @minX
-
         lighting = @computeLighting(pageRotation - rotate, dRotate)
-
         radian += dRadian
         rotate += dRotate
         [face+i, image, lighting, bgPos, m.toString(), Math.abs(Math.round(z))]
-
     computeLighting: (rot, dRotate) ->
       gradients = []
       lightingPoints = [-0.5, -0.25, 0, 0.25, 0.5]
@@ -588,7 +537,6 @@ export default
             rgba(0, 0, 0, #{diffuse[3]}) 75%,
             rgba(0, 0, 0, #{diffuse[4]}))
           """
-
       if @gloss > 0 and not IE
         DEG = 30
         POW = 200
@@ -606,7 +554,6 @@ export default
             rgba(255, 255, 255, #{specular[4] * @gloss}))
           """
       gradients.join(',')
-
     flipStart: (direction, auto) ->
       if direction != @forwardDirection
         if @displayedPages == 1
@@ -622,7 +569,6 @@ export default
         else
           @flip.frontImage = @pageUrl(@secondPage)
           @flip.backImage = @pageUrl(@currentPage + @displayedPages)
-
       @flip.direction = direction
       @flip.progress = 0
       requestAnimationFrame => requestAnimationFrame =>
@@ -635,7 +581,6 @@ export default
           else
             @secondPage = @currentPage + 1 + @displayedPages
         @flipAuto(true) if auto
-
     flipAuto: (ease) ->
       t0 = Date.now()
       duration = @flipDuration * (1 - @flip.progress)
@@ -661,7 +606,6 @@ export default
             @onImageLoad 1, => @flip.direction = null
           @flip.auto = false
       animate()
-
     flipRevert: ->
       t0 = Date.now()
       duration = @flipDuration * @flip.progress
@@ -683,12 +627,10 @@ export default
             @onImageLoad 1, => @flip.direction = null
           @flip.auto = false
       animate()
-
     onImageLoad: (trigger, cb) ->
       @nImageLoad = 0
       @nImageLoadTrigger = trigger
       @imageLoadCallback = cb
-
     didLoadImage: (ev) ->
       if @imageWidth == null
         @imageWidth = (ev.target or ev.path[0]).naturalWidth
@@ -698,17 +640,14 @@ export default
       if ++@nImageLoad >= @nImageLoadTrigger
         @imageLoadCallback()
         @imageLoadCallback = null
-
     zoomIn: ->
       return unless @canZoomIn
       @zoomIndex += 1
       @zoomTo @zooms_[@zoomIndex]
-
     zoomOut: ->
       return unless @canZoomOut
       @zoomIndex -= 1
       @zoomTo @zooms_[@zoomIndex]
-
     zoomTo: (zoom, fixedX, fixedY) ->
       start = @zoom
       end = zoom
@@ -721,7 +660,6 @@ export default
       containerFixedY = fixedY + startY
       endX = containerFixedX / start * end - fixedX
       endY = containerFixedY / start * end - fixedY
-
       t0 = Date.now()
       @zooming = true
       @$emit 'zoom-start', zoom
@@ -744,14 +682,12 @@ export default
       animate()
       if end > 1
         @preloadImages true
-
     zoomAt: (touch) ->
       rect = @$refs.viewport.getBoundingClientRect()
       x = touch.pageX - rect.left
       y = touch.pageY - rect.top
       @zoomIndex = (@zoomIndex + 1) % @zooms_.length
       @zoomTo @zooms_[@zoomIndex], x, y
-
     swipeStart: (touch) ->
       @touchStartX = touch.pageX
       @touchStartY = touch.pageY
@@ -762,7 +698,6 @@ export default
         @startScrollLeft = @$refs.viewport.scrollLeft
         @startScrollTop = @$refs.viewport.scrollTop
         @activeCursor = 'all-scroll'
-
     swipeMove: (touch) ->
       return unless @touchStartX?
       x = touch.pageX - @touchStartX
@@ -787,7 +722,6 @@ export default
           @flip.progress = -x / @pageWidth
           @flip.progress = 1 if @flip.progress > 1
       true
-
     swipeEnd: (touch) ->
       return unless @touchStartX?
       @zoomAt touch if @maxMove < @swipeMin
@@ -798,7 +732,6 @@ export default
           @flipRevert()
       @touchStartX = null
       @activeCursor = null
-
     onTouchStart: (ev) ->
       @hasTouchEvents = true
       @swipeStart ev.changedTouches[0]
@@ -806,7 +739,6 @@ export default
       if @swipeMove ev.changedTouches[0]
         ev.preventDefault() if ev.cancelable
     onTouchEnd: (ev) -> @swipeEnd ev.changedTouches[0]
-
     onPointerDown: (ev) ->
       @hasPointerEvents = true
       return if @hasTouchEvents
@@ -815,16 +747,13 @@ export default
       try
         ev.target.setPointerCapture ev.pointerId
       catch
-
     onPointerMove: (ev) -> @swipeMove ev unless @hasTouchEvents
-
     onPointerUp: (ev) ->
       return if @hasTouchEvents
       @swipeEnd ev
       try
         ev.target.releasePointerCapture ev.pointerId
       catch
-
     onMouseDown: (ev) ->
       return if @hasTouchEvents or @hasPointerEvents
       return if ev.which and ev.which != 1 # Ignore right-click
@@ -833,17 +762,14 @@ export default
       @swipeMove ev unless @hasTouchEvents or @hasPointerEvents
     onMouseUp: (ev) ->
       @swipeEnd ev unless @hasTouchEvents or @hasPointerEvents
-
     dragScroll: (x, y) ->
       @scrollLeft = @startScrollLeft - x
       @scrollTop = @startScrollTop - y
-
     onWheel: (ev) ->
       if @zoom > 1 and @dragToScroll
         @scrollLeft = @$refs.viewport.scrollLeft + ev.deltaX
         @scrollTop = @$refs.viewport.scrollTop + ev.deltaY
         ev.preventDefault() if ev.cancelable
-
     preloadImages: (hiRes = false) ->
       for i in [@currentPage - 3 .. @currentPage + 3]
         @pageUrlLoading i # this preloads image
@@ -853,7 +779,6 @@ export default
           if src
             (new Image).src = src
       return
-
     goToPage: (p) ->
       return if p == null or p == @page
       if @pages[0] == null
@@ -866,7 +791,6 @@ export default
       @minX = Infinity
       @maxX = -Infinity
       @currentCenterOffset = @centerOffset
-
     loadImage: (url) ->
       if @imageWidth == null
         # First loaded image defines the image width and height.
@@ -880,13 +804,11 @@ export default
           img.onload = => @$set @loadedImages, url, true
           img.src = url
           @loadingImage
-
   watch:
     currentPage: ->
       @firstPage = @currentPage
       @secondPage = @currentPage + 1
       @preloadImages()
-
     centerOffset: ->
       return if @animatingCenter
       animate = => requestAnimationFrame =>
@@ -900,25 +822,21 @@ export default
           animate()
       @animatingCenter = true
       animate()
-
     scrollLeftLimited: (val) ->
       if IE
         requestAnimationFrame => @$refs.viewport.scrollLeft = val
       else
         @$refs.viewport.scrollLeft = val
-
     scrollTopLimited: (val) ->
       if IE
         requestAnimationFrame => @$refs.viewport.scrollTop = val
       else
         @$refs.viewport.scrollTop = val
-
     pages: (after, before) ->
       @fixFirstPage()
       if not before?.length and after?.length
         if @startPage > 1 and after[0] == null
           @currentPage++
-
     startPage: (p) -> @goToPage p
 </script>
 
@@ -928,15 +846,12 @@ export default
   width: 100%;
   height: 100%;
 }
-
 .viewport.zoom {
   overflow: scroll;
 }
-
 .viewport.zoom.drag-to-scroll {
   overflow: hidden;
 }
-
 .flipbook-container {
   position: relative;
   width: 100%;
@@ -944,7 +859,6 @@ export default
   transform-origin: top left;
   user-select: none;
 }
-
 .click-to-flip {
   position: absolute;
   width: 50%;
@@ -952,25 +866,20 @@ export default
   top: 0;
   user-select: none;
 }
-
 .click-to-flip.left {
   left: 0;
 }
-
 .click-to-flip.right {
   right: 0;
 }
-
 .bounding-box {
   position: absolute;
   user-select: none;
 }
-
 .page {
   position: absolute;
   backface-visibility: hidden;
 }
-
 .polygon {
   position: absolute;
   top: 0;
@@ -979,11 +888,9 @@ export default
   backface-visibility: hidden;
   transform-origin: center left;
 }
-
 .polygon.blank {
   background-color: #ddd;
 }
-
 .polygon .lighting {
   width: 100%;
   height: 100%;
