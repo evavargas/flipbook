@@ -50,6 +50,7 @@ export default {
   background-size: 100% auto;
   box-sizing: border-box;
 }
+
 .boneleft {
   mask-image: url(../../src/assets/effects/xray.png);
   mask-repeat: no-repeat;
