@@ -1,43 +1,56 @@
 <template>
-  <div class="fleshleft" :style="{ 'background-image': 'url(' + urlbackleft + ')' }">
+  <div
+    class="fleshleft"
+    :style="{ 'background-image': 'url(' + urlbackleft + ')' }"
+  >
     <img :src="imagesrcleft" class="boneleft" />
   </div>
 </template>
 
 <script>
-
 export default {
   props: {
     imagesrcleft: String,
-    urlbackleft: String
+    urlbackleft: String,
   },
-  computed:{
-
+  computed: {},
+  methods: {},
+  created: function () {
+    $(document).ready(function () {
+      var currentMousePos = { x: -1, y: -1 };
+      $("div.fleshleft").mousemove(function (e) {
+        console.log("on");
+        currentMousePos.x = e.pageX;
+        currentMousePos.y = e.pageY;
+        $("img.boneleft").css(
+          "-webkit-mask-position-x",
+          currentMousePos.x - 180
+        );
+        $("img.boneleft").css(
+          "-webkit-mask-position-y",
+          currentMousePos.y - 240
+        );
+      });
+    });
   },
-  methods:{
-
+  beforeUpdate: function () {
+    var element = document.getElementsByClassName("fleshleft")[0];
+    console.log(element);
+    element.className += "visibilityOff";
   },
-  mounted: function (){
-      $(document).ready(function(){
-              var currentMousePos = { x: -1, y: -1 };
-              $('div.fleshleft').mousemove(function(e) {
-                  console.log("on")
-                  currentMousePos.x = e.pageX;
-                  currentMousePos.y = e.pageY;
-                $('img.boneleft').css('-webkit-mask-position-x', currentMousePos.x -180);
-                $('img.boneleft').css('-webkit-mask-position-y', currentMousePos.y -240)
-              });
-          })
-  }
 };
 </script>
 
 <style scoped >
+.visibilityOff {
+  display: none;
+}
 .fleshleft {
   background-repeat: no-repeat;
   background-size: 100% auto;
   box-sizing: border-box;
 }
+
 .boneleft {
   mask-image: url(../../src/assets/effects/xray.png);
   mask-repeat: no-repeat;
@@ -47,8 +60,8 @@ export default {
   width: inherit;
   height: inherit;
 }
-@media screen and (max-width: 600px){
-  .boneleft{
+@media screen and (max-width: 600px) {
+  .boneleft {
     mask-size: 80px;
   }
 }

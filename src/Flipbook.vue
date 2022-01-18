@@ -53,9 +53,9 @@
         >
           <EffectRight
             class="page fixed"
-            imagesrcright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
-            urlbackright="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
-            v-show="page == 2"
+            imagesrcright="/images/gatalogo/cat2Xray.png"
+            urlbackright="/images/gatalogo/cat2.jpg"
+            v-if="(page == 2) & showRightPage "
             :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
@@ -63,13 +63,13 @@
               top: yMargin + 'px',
               zIndex: 3,
             }"
-            v-if="showRightPage"
           />
           <!--Si no corresponde rigth, muestra el left-->
           <EffectLeft
             class="page fixed"
-            imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat2Xray.png"
-            urlbackleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat2.jpg"
+            imagesrcleft="/images/gatalogo/cat2Xray.png"
+            urlbackleft="/images/gatalogo/cat2.jpg"
+            v-if="(page == 3) & showLeftPage"
             :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
@@ -77,15 +77,13 @@
               top: yMargin + 'px',
               zIndex: 3,
             }"
-            v-if="showLeftPage"
-            v-show="page == 3"
           />
           <!---Corresponde a una pagina izquierda por defecto-->
           <EffectLeft
             class="page fixed"
-            imagesrcleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3Xray.png"
-            urlbackleft="https://catalogimg.blob.core.windows.net/catalogo2020/cat3.png"
-            v-show="page == 4"
+            imagesrcleft="/images/gatalogo/cat3Xray.png"
+            urlbackleft="/images/gatalogo/cat3.png"
+            v-if="(page == 4) & showLeftPage"
             :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
@@ -93,9 +91,7 @@
               top: yMargin + 'px',
               zIndex: 3,
             }"
-            v-if="showLeftPage"
           />
-
           <img
             class="page fixed"
             :style="{
