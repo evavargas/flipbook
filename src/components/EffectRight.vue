@@ -33,11 +33,6 @@ export default {
       });
     });
   },
-  beforeUpdate: function () {
-    var element = document.getElementsByClassName("fleshright")[0];
-    console.log(element);
-    element.className += "visibilityOff";
-  },
 };
 </script>
 

@@ -33,18 +33,12 @@ export default {
       });
     });
   },
-  beforeUpdate: function () {
-    var element = document.getElementsByClassName("fleshleft")[0];
-    console.log(element);
-    element.className += "visibilityOff";
-  },
+
 };
 </script>
 
 <style scoped >
-.visibilityOff {
-  display: none;
-}
+
 .fleshleft {
   background-repeat: no-repeat;
   background-size: 100% auto;

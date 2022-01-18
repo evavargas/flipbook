@@ -83,7 +83,7 @@
             class="page fixed"
             imagesrcleft="/images/gatalogo/cat3Xray.png"
             urlbackleft="/images/gatalogo/cat3.png"
-            v-if="(page == 4) & showLeftPage"
+            v-if="(page == 4) & showRightPage"
             :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
