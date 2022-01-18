@@ -55,7 +55,7 @@
             class="page fixed"
             imagesrcright="/images/gatalogo/cat2Xray.png"
             urlbackright="/images/gatalogo/cat2.jpg"
-            v-if="(page == 2) & showRightPage "
+            v-if="(page == 2) & showRightPage"
             :style="{
               width: pageWidth + 'px',
               height: pageHeight + 'px',
@@ -161,7 +161,7 @@
             @touchstart="onTouchStart"
             @pointerdown="onPointerDown"
             @mousedown="onMouseDown"
-          /> 
+          />
         </div>
       </div>
     </div>

@@ -3,25 +3,32 @@
     <div class="modal-wrapper">
       <div class="modal-container">
         <div class="modal-header">
-          <slot name="header"> Para continuar, habilite la pantalla completa o presione la tecla F11 </slot>
+          <slot name="header">
+            Para continuar, habilite la pantalla completa o presione la tecla
+            F11
+          </slot>
         </div>
 
         <div class="modal-body">
           <slot name="body">
-            <button @click="fullScreen" style="background-color: #614389; color: white">Habilitar Pantalla Completa
-            <monitor-icon
-           @click="fullScreen = true" 
-        id="show-modal" 
-       
-         />
-         </button>
+            <button
+              @click="fullScreen"
+              style="background-color: #614389; color: white"
+            >
+              Habilitar Pantalla Completa
+              <monitor-icon @click="fullScreen = true" id="show-modal" />
+            </button>
           </slot>
         </div>
 
         <div class="modal-footer">
           <slot name="footer">
             para desactivar, presione nuevamente F11
-            <button  style="background-color: #614389; color: white" class="modal-default-button" @click="$emit('close')">
+            <button
+              style="background-color: #614389; color: white"
+              class="modal-default-button"
+              @click="$emit('close')"
+            >
               OK
             </button>
           </slot>
@@ -32,23 +39,21 @@
 </template>
 
 <script>
-
-import MonitorIcon from 'vue-material-design-icons/MonitorScreenshot'
+import MonitorIcon from "vue-material-design-icons/MonitorScreenshot";
 
 export default {
-methods:{
+  methods: {
     fullScreen() {
-        var elem = document.getElementById("app");
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        }
-    }
-},
-components:{
-  MonitorIcon
-}
-}
-
+      var elem = document.getElementById("app");
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      }
+    },
+  },
+  components: {
+    MonitorIcon,
+  },
+};
 </script>
 <style scoped>
 #app {
@@ -83,7 +88,8 @@ components:{
   font-family: Helvetica, Arial, sans-serif;
 }
 
-.modal-header, .modal-footer {
+.modal-header,
+.modal-footer {
   margin-top: 0;
   color: #614389;
   font-size: 14px;

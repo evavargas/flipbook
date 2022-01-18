@@ -4,16 +4,18 @@
     :class="{ 'has-mouse': hasMouse }"
     @touchstart="hasMouse = false"
   >
-  
-  <Modal v-if="showModal" @close="showModal = false">
-    <!--
+    <Modal v-if="showModal" @close="showModal = false">
+      <!--
       you can use custom content here to overwrite
       default content
     -->
-
-
-  </Modal>
-    <sidebar-menu :menu="menu" :theme="'white-theme'" :relative="true" :collapsed="true" >
+    </Modal>
+    <sidebar-menu
+      :menu="menu"
+      :theme="'white-theme'"
+      :relative="true"
+      :collapsed="true"
+    >
       <span slot="dropdown-icon"><view-array-icon /></span>
       <span slot="toggle-icon"><view-day /></span>
       <span slot="header" class="icon-company"></span>
@@ -33,12 +35,7 @@
       @zoom-end="onZoomEnd"
     >
       <div class="action-bar">
-
-          <monitor-icon
-           @click="fullScreen" class="btn left" 
-        id="show-modal" 
-       
-         />
+        <monitor-icon @click="fullScreen" class="btn left" id="show-modal" />
         <left-icon
           class="btn left"
           :class="{ disabled: !flipbook.canFlipLeft }"
